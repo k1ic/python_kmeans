@@ -33,7 +33,7 @@ def saveData(filePath, data):
     file.close()
 
 
-data, cityName = loadData('provincial_consumption_level.csv')
+data, cityName = loadData('province_consumption_level.csv')
 km = KMeans(n_clusters=3) # 将省份分3类
 label = km.fit_predict(data) # 获取各省份所属的类编号
 avgExpenses = np.average(km.cluster_centers_, axis=1)  # axis 1按行 2按列 求平均
