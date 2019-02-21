@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# tested in python2.7
+# run in python2.7
 
 from sklearn.cluster import KMeans
 from sklearn.externals import joblib
