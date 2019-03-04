@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # test in python27
 
-from numpy import *
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 import time
+import sys
+from numpy import *
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
@@ -22,8 +23,20 @@ def loadDataMatrix(fileName):
     return mat(dataSet)
 
 if __name__ == "__main__":
-    X = loadDataMatrix('./source_data/1.data').getA()
-    K = range(1, 10)
+    print('用法: python ' + __file__ + ' [待分析的数据文件（列间用逗号分割）] [簇的最大值（从1到最大值之间寻找合适的簇数量值，默认值：12）]')
+
+    if len(sys.argv) == 1:
+       exit('Param error, need file to analysis!')
+    else:
+	dataFilePath = sys.argv[1]
+
+    if len(sys.argv) == 3 and int(sys.argv[2]) > 1:
+        kMax = int(sys.argv[2])
+    else:
+	kMax = 12
+
+    X = loadDataMatrix(dataFilePath).getA()
+    K = range(1, kMax)
 
     meandistortions = []
     for k in K:
