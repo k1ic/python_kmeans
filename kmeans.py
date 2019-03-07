@@ -38,18 +38,18 @@ km=KMeans(n_clusters=cluster_num).fit(data)
 #标签结果
 rs_labels=km.labels_
 
-#每个类别的中心点
+#各簇的质心
 rs_center_ids=km.cluster_centers_
 
-# 用 [[]] * cluster_num 方式创建的list，append元素后是添加了整行，不合预期
 # 初始化存储各簇信息的list
+# 注：用 [[]] * cluster_num 方式创建的list，append元素后是添加了整行，不合预期
 clusters = [[] for i in range(cluster_num)]
 
 #按数据标签将数据放入各簇
 for k,v in enumerate(rs_labels):
     clusters[v].append(data[k].tolist())
 
-#用于按各簇元素个数正序排列，需耗费1/10的时间
+#用于按各簇元素个数正序排列，需额外耗费1/10的时间，酌情使用
 #clusters.sort(key = len)
 
 colors = ['r', 'g', 'b', 'y', 'c', 'm']
@@ -58,6 +58,7 @@ markers = ['^', 'o', '*', 's', 'd', 'h']
 for i in range(cluster_num):
     #画各簇数据散点图
     plt.scatter(np.array(clusters[i])[:,0], np.array(clusters[i])[:,1], s=30, c=colors[i], marker=markers[i], alpha=0.8, label='Cluster_'+str(i)+' '+str(len(clusters[i])))
+    
     #将各簇数据写入文件
     fileName = './target_data_1/OpenApp_SendGiftSum_cluster'+str(i)+"_total_"+str(len(clusters[i]))+".csv"
     f = open(fileName, 'a')
@@ -68,7 +69,7 @@ for i in range(cluster_num):
 
     f.close()
 
-#指定标签的显示位置
+#指定图例的显示位置
 plt.legend(loc='upper right')
 
 # 画各簇质心点
