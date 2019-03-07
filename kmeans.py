@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # create by k1ic at 20190306
-# KMeans 会自动使用cpu多核
+# 注：KMeans 会自动使用cpu多核，该脚本只每行只有两列的数据（正好对应二维坐标系x、y轴）
 # test in python27
 
 from sklearn.cluster import KMeans
